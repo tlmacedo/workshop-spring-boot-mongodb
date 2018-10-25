@@ -1,29 +1,34 @@
 package com.thiagomacedo.whorkshopmongo.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 
+@Document(collection = "user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int id;
+    @Id
+    private String id;
     private String name;
     private String email;
 
     public User() {
     }
 
-    public User(int id, String name, String email) {
+    public User(String id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -50,11 +55,11 @@ public class User implements Serializable {
 
         User user = (User) o;
 
-        return id == user.id;
+        return id.equals(user.id);
     }
 
     @Override
     public int hashCode() {
-        return id;
+        return id.hashCode();
     }
 }
